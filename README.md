@@ -24,7 +24,7 @@ This will allow you to enter into the project directory where we will be install
 We will be installing React Native Navigation. You can follow the instruction from this link [React Navigation](https://reactnavigation.org/docs/getting-started)
 Type the following in terminal inside your project directory to install react navigation.
 ```
-npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs
+npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs react-native-gesture-handler
 ```
 This will primarily install React Navigation, Stack Navigation and Bottom Tab Navigation along with some other essential libraries.
 
