@@ -45,6 +45,16 @@ This will primarily install Firebase and several of its important tools like
 - Firebase/storage
 - Firebase/database
 
+###### Installing Vector Icons
+
+```
+npm install react-native-vector-icons
+```
+
+###### Installing React Native Camera For Camera Control
+```
+react-native-camera
+```
 
 ## Start The Project
 
