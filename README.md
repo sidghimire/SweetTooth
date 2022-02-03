@@ -53,7 +53,7 @@ npm install react-native-vector-icons
 
 ###### Installing React Native Camera For Camera Control
 ```
-yarn add react-native-camera-kit
+yarn add react-native-camera
 ```
 
 ## Start The Project
