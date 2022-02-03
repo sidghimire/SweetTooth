@@ -56,6 +56,11 @@ npm install react-native-vector-icons
 yarn add react-native-camera
 ```
 
+###### Add All Packages By
+```
+npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs react-native-gesture-handler firebase react-native-vector-icons react-native-camera
+```
+
 ## Start The Project
 
 I will be using an external phone for development. You can use an android emulator too as long as it works perfectly fine.
