@@ -56,10 +56,40 @@ npm install react-native-vector-icons
 yarn add react-native-camera
 ```
 
+###### Add permissions to your app android/app/src/main/AndroidManifest.xml file:
+
+```
+<!-- Required -->
+<uses-permission android:name="android.permission.CAMERA" />
+
+<!-- Include this only if you are planning to use the camera roll -->
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+<!-- Include this only if you are planning to use the microphone for video recording -->
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+```
+
+###### Insert the following lines in android/app/build.gradle:
+
+```
+android {
+  ...
+  defaultConfig {
+    ...
+    missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
+    multiDexEnabled true
+  }
+}
+```
+
+
 ###### Add All Packages By
 ```
 npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs react-native-gesture-handler firebase react-native-vector-icons react-native-camera
 ```
+
+
 
 ## Start The Project
 
