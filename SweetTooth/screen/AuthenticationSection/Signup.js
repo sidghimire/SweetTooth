@@ -1,14 +1,19 @@
 import React,{useState} from 'react';
-import { View, Text, TouchableOpacity, StyleSheet,TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,TextInput,Image } from 'react-native';
 import { firebaseConfig } from '../../firebase';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getAuth,signOut,signInWithRedirect,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, createUserWithEmailAndPassword} from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import BackgroundImage1 from "../../resources/images/UI/maskGroup2.png";
+import Croissant from "../../resources/images/UI/Image3.png";
+import BackgroundMask1 from "../../resources/images/UI/ellipse2.png";
 
 function Signup({navigation}) {
     const auth=getAuth();
     auth.languageCode = 'it';
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
+    const [username,setUsername]=useState('');
     const google=new GoogleAuthProvider();
     const facebook=new GoogleAuthProvider();
     google.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -40,6 +45,13 @@ function Signup({navigation}) {
     }
     return (
     <View style={styles.container}>
+        <View style={{marginBottom:30,marginTop:-100}}>
+            <Image source={BackgroundImage1} style={styles.backgroundImage}/>
+            <Image source={BackgroundMask1} style={[styles.backgroundImage,{position:'absolute',opacity:0.6}]}/>
+        </View>
+        {/*<Image source={Croissant} style={{position:'absolute',bottom:-30,left:-20}}/>*/}
+
+        <TextInput style={styles.inputField} placeholder='Username' placeholderTextColor={"#a9a9a9"} value={username} onChangeText={text=>setUsername(text)} />
         <TextInput style={styles.inputField} placeholder='Email' placeholderTextColor={"#a9a9a9"} value={email} onChangeText={text=>setEmail(text)} />
         <TextInput style={styles.inputField} placeholder='Password' placeholderTextColor={"#a9a9a9"} value={password} onChangeText={text=>setPassword(text)} />
         <TouchableOpacity style={styles.signUpButton} onPress={createNewAccount}>
@@ -47,26 +59,19 @@ function Signup({navigation}) {
                 Sign Up
             </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.signUpButton} onPress={googleSignIn}>
-            <Text style={{color:'#fff',textAlign:'center'}}>
-                Sign Up With Google
-            </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signUpButton} onPress={facebookSignIn}>
-            <Text style={{color:'#fff',textAlign:'center'}}>
-                Sign Up With Facebook
-            </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signUpButton} onPress={twitterSignIn}>
-            <Text style={{color:'#fff',textAlign:'center'}}>
-                Sign Up With Twitter
-            </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signUpButton} onPress={()=>navigation.navigate('Login')}>
-            <Text style={{color:'#fff',textAlign:'center'}}>
+        <Text style={{textAlign:"center",fontSize:12,marginTop:30,marginBottom:20}}>OR</Text>
+        <View style={{flexDirection:'row',alignSelf:'center'}}>
+            <Icon name="google" size={25} color="#E34133" style={{marginTop:10,marginHorizontal:5}}/>
+            <Icon name="facebook" size={25} color="#3b5998" style={{marginTop:10,marginHorizontal:5}}/>
+            <Icon name="twitter" size={25} color="#1C9CEA" style={{marginTop:10,marginHorizontal:5}}/>
+        </View>
+        <View style={{flexDirection:'row',alignSelf:'center',marginTop:30}}>
+            <Text style={{textAlign:"center",fontSize:12}}>Already have an account?</Text>
+            <Text style={{color:'#4EA1D1',marginLeft:10,fontSize:12,textDecorationLine:'underline'}} onPress={()=>navigation.navigate("Login")}>
                 Login
             </Text>
-        </TouchableOpacity>
+            
+        </View>
     </View>);
     }
 
@@ -80,18 +85,27 @@ const styles = StyleSheet.create({
     },
     inputField: {
         padding:10,
-        borderWidth:1,
-        borderColor:'#000',
+        borderBottomWidth:1,
+        borderColor:'#909090',
         width:'80%',
         alignSelf:'center',
         marginVertical:10,
     },
     signUpButton:{
-        backgroundColor:'#000',
+        backgroundColor:'#4EA1D1',
+        borderRadius:50,
         padding:10,
         width:'80%',
         alignSelf:'center',
-        marginTop:20
+        marginTop:20,
+        paddingVertical:15
+
+    },
+    backgroundImage:{
+        width:'100%',
+        height:400,
+        resizeMode:'cover',
+        
 
     }
 });
