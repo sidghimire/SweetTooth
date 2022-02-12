@@ -24,7 +24,16 @@ This will allow you to enter into the project directory where we will be install
 We will be installing React Native Navigation. You can follow the instruction from this link [React Navigation](https://reactnavigation.org/docs/getting-started)
 Type the following in terminal inside your project directory to install react navigation.
 ```
-npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs react-native-gesture-handler
+yarn add @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs react-native-gesture-handler
+```
+We will also be using Material Top Tabs for Left and Right Swipe
+```
+yarn add @react-navigation/material-top-tabs
+```
+```
+yarn add @react-navigation/material-top-tabs react-native-tab-view
+yarn add react-native-pager-view
+
 ```
 This will primarily install React Navigation, Stack Navigation and Bottom Tab Navigation along with some other essential libraries.
 
@@ -37,18 +46,18 @@ We will be using Firebase out Backend-as-a-service (Bass). You can follow [Fireb
  
 Type the following in terminal inside your project directory to install Firebase.
 ```
-npm install firebase
+yarn add firebase
 ```
 This will primarily install Firebase and several of its important tools like 
 - Firebase/auth
-- Firebase/firestore
+- Firebase/firestore/lite
 - Firebase/storage
 - Firebase/database
 
 ###### Installing Vector Icons
 
 ```
-npm install react-native-vector-icons
+yarn add react-native-vector-icons
 ```
 
 ###### Installing React Native Camera For Camera Control
@@ -83,11 +92,32 @@ android {
 }
 ```
 
+###### Installing library for using animation
+```
+yarn add lottie-react-native
+```
 
-###### Add All Packages By
+###### Installing React Native FS
 ```
-npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/stack @react-navigation/bottom-tabs react-native-gesture-handler firebase react-native-vector-icons react-native-camera
+yarn add react-native-fs
 ```
+
+###### Install Image Picker to grab image from gallery
+```
+yarn add react-native-image-picker
+```
+
+###### Install Image Resizer To resize image before upload
+```
+yarn add react-native-image-resizer
+```
+
+###### Install Gradient Color For Few Gui Features
+```
+yarn add react-native-linear-gradient
+```
+
+
 
 
 
