@@ -106,6 +106,14 @@ yarn add react-native-fs
 ```
 yarn add react-native-image-picker
 ```
+Add the following to android/src/debug/AndroidManifest.xml
+
+```
+<uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+```
 
 ###### Install Image Resizer To resize image before upload
 ```
