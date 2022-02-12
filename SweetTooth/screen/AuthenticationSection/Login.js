@@ -5,17 +5,20 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BackgroundImage1 from "../../resources/images/UI/image1.png";
 import BackgroundMask1 from "../../resources/images/UI/Path2.png";
 import BackgroundMask2 from "../../resources/images/UI/Path3.png";
-import BackgroundImage2 from "../../resources/images/UI/Image4.png";
+import AppLoader from "../../resources/animation/AppLoader"
 
 function Login({navigation}) {
+    const [isLoading,setIsLoading]=useState(false);
     const auth=getAuth();
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     const createNewAccount=()=>{
+        setIsLoading(true);
         signInWithEmailAndPassword(auth,email,password)
         .then(()=>{
             setEmail('');
             setPassword('');
+            setIsLoading(false);
         })
         .catch(error=>{
             console.log(error);
@@ -52,6 +55,11 @@ function Login({navigation}) {
             </Text>
             
         </View>
+        {
+            isLoading?
+            <AppLoader/>
+            :null
+        }
     </View>);
     }
 

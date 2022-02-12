@@ -7,9 +7,11 @@ import { initializeApp } from 'firebase/app';
 import BackgroundImage1 from "../../resources/images/UI/maskGroup2.png";
 import Croissant from "../../resources/images/UI/Image3.png";
 import BackgroundMask1 from "../../resources/images/UI/ellipse2.png";
+import {doc,collection,setDoc,addDoc,getDoc,getFirestore} from 'firebase/firestore/lite';
 
 function Signup({navigation}) {
     const auth=getAuth();
+    const db=getFirestore();
     auth.languageCode = 'it';
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
@@ -35,9 +37,22 @@ function Signup({navigation}) {
     }
     const createNewAccount=()=>{
         createUserWithEmailAndPassword(auth,email,password)
-        .then(()=>{
-            setEmail('');
-            setPassword('');
+        .then(async(result)=>{
+            console.log(result.user.uid)
+            let data={
+                username:username,
+                email:email,
+                uid:result.user.uid,
+                date:Date.now()
+            }
+            const collectionDB=collection(db,'users');
+            await addDoc(collectionDB,data)
+            .then(()=>{
+                setEmail('');
+                setPassword('');
+            })
+
+           
         })
         .catch(error=>{
             console.log(error);

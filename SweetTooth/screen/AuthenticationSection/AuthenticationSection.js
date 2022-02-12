@@ -1,5 +1,4 @@
 import React from 'react';
-import {StatusBar, Text,Touchable,TouchableOpacity,View} from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Signup from './Signup';
 import Login from './Login';
