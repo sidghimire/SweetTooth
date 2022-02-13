@@ -13,6 +13,7 @@ function Profile({navigation}) {
     const [username,setUsername]=useState("");
     const [isLoading,setIsLoading]=useState(true);
     const [postData,setPostData]=useState(null);
+    const [postNumber,setPostNumber]=useState(null);
     const [profileImage,setProfileImage]=useState("../../../resources/images/avatar/1.png");
 useEffect(()=>{
     getUsername();
@@ -41,7 +42,9 @@ useEffect(()=>{
                 col.push([doc.id,doc.data()]) 
             })
             setPostData(col);
+            setPostNumber(col.length);
         })
+        
         setIsLoading(false);
 
     }
@@ -90,7 +93,7 @@ useEffect(()=>{
             </View>
             <View style={{flexDirection:'row'}}>
                 <View style={[styles.followersText,{borderRightWidth:1,borderRightColor:'#c9c9c9'}]}>
-                    <Text style={styles.followerNumber}>150</Text>
+                    <Text style={styles.followerNumber}>{postNumber}</Text>
                     <Text style={styles.followerLabel}>Posts</Text>
                 </View>   
                 <View style={[styles.followersText,{borderRightWidth:1,borderRightColor:'#c9c9c9'}]}>

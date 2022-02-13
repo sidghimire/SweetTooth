@@ -9,7 +9,7 @@ import {
   FlatList,
   Image,
   Modal,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
 import {getAuth} from 'firebase/auth';
 import {
@@ -34,13 +34,12 @@ function HomeScreen() {
   const storage = getStorage();
   const [storyData, setStoryData] = useState(null);
   const [postData, setPostData] = useState(null);
-  const [profileImage, setProfileImage] = useState('');
   useEffect(() => {
     getStoryData();
     getPostData();
   }, []);
-
-  const getStoryData = async () => {
+  /*
+const getStoryData = async () => {
     const docDB = collection(db, 'stories');
     const q = query(docDB);
     await getDocs(q).then(result => {
@@ -51,6 +50,38 @@ function HomeScreen() {
       setStoryData(col);
     });
   };
+  */
+
+  const getStoryData = async () => {
+    const docDB = collection(db, 'stories');
+    const q = query(docDB);
+    var allData = [];
+    await getDocs(q).then(posts => {
+      posts.forEach(async post => {
+        allData.push([post.id, post.data()]);
+      });
+    });
+    const col = [];
+    const docLength = allData.length;
+    var i = 0;
+    allData.forEach(async post => {
+      const userId = post[1].userId;
+      const docDB = collection(db, 'users');
+      const q2 = query(docDB, where('uid', '==', userId));
+      await getDocs(q2).then(result => {
+        result.forEach(doc => {
+          col.push([post[0], post[1], doc.data()]);
+        });
+      });
+      i++;
+      if (i == docLength) {
+        setIsLoading(false);
+        setStoryData(col);
+      }
+    });
+
+    setIsLoading(false);
+  };
 
   const getPostData = async () => {
     const docDB = collection(db, 'posts');
@@ -58,9 +89,6 @@ function HomeScreen() {
     var allData = [];
     await getDocs(q).then(posts => {
       posts.forEach(async post => {
-        const uid = post.data().uid;
-        const collectionDB = collection(db, 'users');
-        const q2 = query(collectionDB, where('uid', '==', uid));
         allData.push([post.id, post.data()]);
       });
     });
@@ -88,26 +116,26 @@ function HomeScreen() {
 
   const storyItem = ({item}) => {
     return (
-      <View
-        style={{
-          width: 70,
-          height: 70,
-          marginHorizontal: 5,
-          borderRadius: 100,
-          borderColor: '#218721',
-          borderWidth: 3,
-        }}>
-        <Image
-          source={{uri: item[1].smallImageId}}
+      <View>
+        <View
           style={{
-            width: 60,
-            height: 60,
+            padding:2,
+            marginHorizontal: 5,
             borderRadius: 100,
-            alignSelf: 'center',
-            marginTop: 'auto',
-            marginBottom: 'auto',
-          }}
-        />
+            borderColor: '#218721',
+            borderWidth: 3,
+          }}>
+          <Image
+            source={{uri: item[1].smallImageId}}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 100,
+              alignSelf: 'center',
+            }}
+          />
+        </View>
+        <Text style={{textAlign:'center',color:'#000',fontWeight:'bold',fontSize:12,justifyContent:'center',marginTop:5}}>{item[2].username}</Text>
       </View>
     );
   };
@@ -134,14 +162,15 @@ function HomeScreen() {
           style={{
             flexDirection: 'row',
             padding: 7,
+            paddingVertical:12,
             borderTopColor: '#e9e9e9',
             borderTopWidth: 1,
           }}>
           <Image
             source={{uri: item[2].smallImageId}}
             style={{
-              width: 40,
-              height: 40,
+              width: 30,
+              height: 30,
               borderRadius: 100,
               borderColor: '#218721',
               borderWidth: 1,
@@ -176,6 +205,7 @@ function HomeScreen() {
             paddingVertical: 15,
             borderTopColor: '#c9c9c9',
             borderTopWidth: 1,
+            paddingBottom:30
           }}>
           <View style={{flex: 2, flexDirection: 'column'}}>
             <Text
@@ -257,10 +287,10 @@ function HomeScreen() {
       <View>
         {postData == null ? (
           <Modal visible={true}>
-          <View style={styles.modalContainer}>
-            <AppLoader />
-          </View>
-        </Modal>
+            <View style={styles.modalContainer}>
+              <AppLoader />
+            </View>
+          </Modal>
         ) : (
           <FlatList
             data={postData}

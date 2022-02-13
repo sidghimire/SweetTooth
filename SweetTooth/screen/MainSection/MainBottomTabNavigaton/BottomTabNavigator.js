@@ -6,20 +6,21 @@ import ChatList from '../Screens/ChatList';
 import ProfileNavigator from '../Navigator/ProfileNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
+import Camera from '../CameraModule/Camera';
+import MaterialTopNavigator from '../MaterialTopNavigation/MaterialTopNavigator';
 const Bottom = createBottomTabNavigator();
 
-const CustomHeader = () => {
+const CustomHeader = ({navigation}) => {
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
       end={{x: 1, y: 0}}
       colors={['#746ac2', '#4e95d1', '#43cecb']}
       style={{flexDirection: 'row', width: '100%', padding: 13}}>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={{fontSize: 20, color: '#fff', fontWeight: 'bold'}}>
-          SweetTooth
-        </Text>
-      </View>
+      <Icon onPress={()=>navigation.navigate('CameraNavigator')} name="camera" style={{marginRight:10}} size={30} color={'#fff'} />
+      <Text style={{fontSize: 20, color: '#fff',justifyContent:'center', fontWeight: 'bold'}}>
+        SweetTooth
+      </Text>
       <View style={{flexDirection: 'row', marginLeft: 'auto'}}>
         <Icon
           name="magnify"
@@ -38,7 +39,7 @@ const CustomHeader = () => {
   );
 };
 
-const BottomTabNavigator = () => {
+const BottomTabNavigator = ({navigation}) => {
   return (
     <Bottom.Navigator
       screenOptions={{
@@ -59,7 +60,7 @@ const BottomTabNavigator = () => {
         options={{
           header: () => null,
           headerShown: true,
-          header: () => <CustomHeader />,
+          header: () => <CustomHeader navigation={navigation} />,
           tabBarIcon: () => {
             return <Icon name="home" size={24} color={'#fff'} />;
           },
@@ -74,18 +75,6 @@ const BottomTabNavigator = () => {
           header: () => <CustomHeader />,
           tabBarIcon: () => {
             return <Icon name="heart" size={24} color={'#fff'} />;
-          },
-        }}
-      />
-      <Bottom.Screen
-        name="Camera"
-        component={ChatList}
-        options={{
-          header: () => null,
-          headerShown: true,
-          header: () => <CustomHeader />,
-          tabBarIcon: () => {
-            return <Icon name="camera" size={24} color={'#fff'} />;
           },
         }}
       />
