@@ -116,7 +116,7 @@ const getStoryData = async () => {
 
   const storyItem = ({item}) => {
     return (
-      <View>
+      <View style={{paddingVertical:10}}> 
         <View
           style={{
             padding:2,
@@ -279,7 +279,7 @@ const getStoryData = async () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={item => item[0]}
             horizontal={true}
-            style={{paddingVertical: 15}}
+            style={{paddingVertical: 0,borderBottomColor:"#e9e9e9",borderBottomWidth:1}}
             nestedScrollEnabled
           />
         )}

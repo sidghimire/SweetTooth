@@ -1,13 +1,18 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import {signOut,getAuth} from 'firebase/auth'
+import {createStackNavigator} from '@react-navigation/stack';
 
-function ChatList() {
+const Stack=createStackNavigator();
+
+function ChatList({navigation}) {
     const auth=getAuth();
 
 return (
 <View style={styles.container}>
-    <Text style={{color:'#000'}} onPress={()=>{signOut(auth)}}>Log Out</Text>
+    <TouchableOpacity style={{backgroundColor:'#e9e9e9',padding:20}} onPress={()=>{navigation.navigate("Chat")}}>
+        <Text>Bibs</Text>
+    </TouchableOpacity>
 </View>);
 }
 
